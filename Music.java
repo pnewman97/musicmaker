@@ -32,7 +32,7 @@ public class Music implements JMC {
 		Phrase melody = CreateMelody(key);
 		melody.addNoteList(melody.getNoteArray());
 		
-		//generate new melody every other time
+		//this makes melody play through twice and then generate a new one
 		for (int i = 0; i < 8; i++) {
 			Phrase newMelody= CreateMelody(key);
 			melody.addNoteList(newMelody.getNoteArray());
@@ -50,7 +50,7 @@ public class Music implements JMC {
 		int inst = INSTRUMENT_OPTIONS[n];
 		p1.setInstrument(inst);
 		
-		//change instrument
+		//manually change instrument
 //		p1.setInstrument(THUMB_PIANO);
 //		p1.setInstrument(EPIANO);
 //		p1.setInstrument(ELECTRIC_GRAND);
@@ -72,7 +72,7 @@ public class Music implements JMC {
 		
 		
 		//select random tempo
-		s.setTempo(rand.nextInt(45) + 50);
+		s.setTempo(rand.nextInt(40) + 40);
 		
 		//jam
 		s.add(p1);
@@ -100,16 +100,17 @@ public class Music implements JMC {
 		
 //use for custom chord progression		
 //		chordSequence = new ArrayList();
+//		chordSequence.add(1);
+//		chordSequence.add(1);
 //		chordSequence.add(2);
 //		chordSequence.add(4);
-//		chordSequence.add(1);
-//		chordSequence.add(5);
 		
 		//print out chord progression
 		for (int i = 0; i < chordSequence.size(); i++) System.out.println(chordSequence.get(i));
 		
 		
-		//create random Rhythm patter for chord progression
+		//create random Rhythm pattern for chord progression
+		//arbitrarily chosen likelihood of choosing either a quarter note(1), eight note(.5), or sixteenth note(.25)
 		double[] timingOptions = { 1, 1, .5, .5, .25};
 		double totalBeats = 0;
 		ArrayList<Double> chordRhythm = new ArrayList<Double>();
@@ -185,7 +186,7 @@ public class Music implements JMC {
 	
 //		for each value that is now in timingOptions, we will now assign a note/pitch to that value		
 //		arbitrarily chosen likelihood of choosing any pitch that is in the key
-//		notes that are in the chord we are playing have a higher likelihood of being chosen because that sounds better
+//		notes that are in the chord we are playing (root, third, fifth) have a higher likelihood of being chosen because that sounds better
 		Integer prevNote = null;
 		for (int i = 0; i < chordSequence.size(); i++) {
 			int chordNumber = chordSequence.get(i);
@@ -231,7 +232,8 @@ public class Music implements JMC {
 			int note = rand.nextInt(melodyOptions.length);
 			for (int j = 0; j < melodyRhythm.size(); j++) {	
 				
-				//ensure that subsequent melody notes stay close together
+				//ensure that subsequent melody notes stay close together, we do not want melody to
+				//be making big jumps all the time
 				int count = 0;
 				while (count < 5 && prevNote != null && Math.abs(melodyOptions[note] - prevNote) > 2) {
 					count++;
