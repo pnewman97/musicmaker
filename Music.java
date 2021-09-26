@@ -157,7 +157,7 @@ public class Music implements JMC {
 		
 //arbitrarily chosen likelihood of choosing either a quarter note(1), eight note(.5), or sixteenth note(.25)		
 		double[] timingOptions = { 1, .5, .5, .25, .25, .25};
-// uncomment for some mozart shit
+// uncomment for a super fast and wild melody
 //			double[] timingOptions = { .125 };
 // uncomment for 3/4 timing (little buggy)
 //			double[] timingOptions = { .3333333333 };
